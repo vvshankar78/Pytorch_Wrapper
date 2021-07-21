@@ -4,9 +4,6 @@
 
 Vidya Shankar
 
-Regular Submission notebook:
-https://github.com/vvshankar78/DeepLearning/blob/master/Extensive%20VisionAI-EVA6/09_Custom_Resnet/CIFAR10_Custom_RESNET.ipynb
-
 
 ### Objective:
 
