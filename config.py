@@ -18,7 +18,7 @@ class ModelConfig(object):
 		self.train_data_path = "/content/tiny-imagenet-200/train"
 		self.url = "http://cs231n.stanford.edu/tiny-imagenet-200.zip"
 		self.target_zip = "/tiny-imagenet-200.zip"
-		self.test_data_path = "/content/tiny-imagenet-200/val"
+		self.val_data_path = "/content/tiny-imagenet-200/val"
 
 
 	def print_config(self):
