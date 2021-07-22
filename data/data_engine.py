@@ -17,8 +17,8 @@ class DataEngine(object):
 		self.batch_size_cuda = args.batch_size_cuda
 		self.batch_size_cpu = args.batch_size_cpu
 		self.num_workers = args.num_workers
-		self.train_data_path = args.train_data_path
-		self.test_data_path = args.test_data_path
+		self.train_data_path = args.train_data_path_engine
+		self.test_data_path = args.val_data_path_engine
 		self.dataset = args.dataset
 		self.load()
 
@@ -34,17 +34,17 @@ class DataEngine(object):
 		if self.dataset == 'Cifar10':
 		  print('generating datasets for cifar10')
 		  train_set = torch.vision.datasets.CIFAR10(root='./../data', train=True, download=True, transform=train_transform)
-		  test_set = torchvision.datasets.CIFAR10(root='./../data', train=False, download=True, transform=test_transform)
+		  val_set = torchvision.datasets.CIFAR10(root='./../data', train=False, download=True, transform=test_transform)
 		elif self.dataset == 'Imagenet':
 		  print('generating datasets for Imagenet')
 		  train_set = torchvision.datasets.ImageFolder(root=self.train_data_path,transform=train_transform)
-		  test_set = torchvision.datasets.ImageFolder(root=self.test_data_path, transform=test_transform)
+		  val_set = torchvision.datasets.ImageFolder(root=self.test_data_path, transform=test_transform)
 
-		return train_set, test_set
+		return train_set, val_set
 
 	def load(self):
 		# Get Train and Test Data
-		train_set, test_set = self._dataset()
+		train_set, val_set = self._dataset()
 
 		# Dataloader Arguments & Test/Train Dataloaders
 		dataloader_args = dict(
@@ -57,7 +57,7 @@ class DataEngine(object):
 				pin_memory= True)
 
 		self.train_loader = torch.utils.data.DataLoader(train_set, **dataloader_args)
-		self.test_loader = torch.utils.data.DataLoader(test_set, **dataloader_args)
+		self.val_loader = torch.utils.data.DataLoader(val_set, **dataloader_args)
 
 	def show_samples(self):
 		# get some random training images

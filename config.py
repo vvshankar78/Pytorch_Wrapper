@@ -17,9 +17,12 @@ class ModelConfig(object):
 		self.epochs = 15
 		self.dataset = 'Imagenet' #'Cifar10'
 		self.train_data_path = "/tiny-imagenet-200/train"
+		self.val_data_path = "/tiny-imagenet-200/val"
+		self.train_data_path_engine = "/content/tiny-imagenet-200/train"
+		self.val_data_path_engine = "/content/tiny-imagenet-200/val"
 		self.url = "http://cs231n.stanford.edu/tiny-imagenet-200.zip"
 		self.target_zip = "/tiny-imagenet-200.zip"
-		self.val_data_path = "/tiny-imagenet-200/val"
+
 
 
 	def print_config(self):
