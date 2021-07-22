@@ -15,10 +15,11 @@ class ModelConfig(object):
 		self.lr = 0.001
 		self.momentum = 0.9
 		self.epochs = 15
-		self.train_data_path = "/content/tiny-imagenet-200/train"
+		self.dataset = 'Imagenet' #'Cifar10'
+		self.train_data_path = "/tiny-imagenet-200/train"
 		self.url = "http://cs231n.stanford.edu/tiny-imagenet-200.zip"
 		self.target_zip = "/tiny-imagenet-200.zip"
-		self.val_data_path = "/content/tiny-imagenet-200/val"
+		self.val_data_path = "/tiny-imagenet-200/val"
 
 
 	def print_config(self):
