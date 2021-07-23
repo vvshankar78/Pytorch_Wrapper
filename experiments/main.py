@@ -30,13 +30,12 @@ import sys, os
 
 from models import Resnet
 from models import my_model
-from models import Resnet_Custom, Resnet
+from models import Resnet_Custom
 from train import train
 from test1 import test
 from config import ModelConfig
 from utils import *
 from data.data_engine import DataEngine
-from data.data_download import download_dataset, unzip_data, format_val
 
 
 # parser = argparse.ArgumentParser(description='PyTorch CIFAR10 Training')
@@ -57,10 +56,6 @@ SEED = 1
 args = ModelConfig()
 args.dropout_value = 0.0
 
-def download_data_prep(args):
-  download_dataset(args)
-  unzip_data(args)
-  format_val(args)
 
 def get_data():
   # View model config
@@ -69,8 +64,8 @@ def get_data():
 
   data = DataEngine(args)
   train_loader= data.train_loader
-  val_loader = data.val_loader
-  return data, train_loader, val_loader
+  test_loader = data.test_loader
+  return data, train_loader, test_loader
 
 
 def show_data(data):
@@ -88,14 +83,12 @@ def check_cuda():
   if cuda:
       torch.cuda.manual_seed(SEED)
 
-def get_model():
-#  model = Resnet_Custom.Net2().to(device)
-  model = Resnet.ResNet18(num_classes=200).to(device)
-
+def get_model(get_summary=False):
+  model = Resnet_Custom.Net2().to(device)
+  if get_summary:
+      summary(model, input_size=(3, 38, 38))
   return model
 
-def show_model_summary(model, input_size):
-	print(summary(model, input_size=input_size))  
 
 def get_lr_finder(model, train_loader):
   criterion = nn.CrossEntropyLoss()
@@ -156,7 +149,7 @@ def run_model(model, train_loader, test_loader, max_lr=0.1):
       print("\nlearning rate", optimizer.param_groups[0]['lr'])
       # scheduler.step()
       # test(model1, device, test_loader, test_losses, test_acc, misclassified_imgs, epoch==EPOCHS-1)
-      test_loss_list, test_accuracy_list, misclassified_imgs = test(model, device, test_loader, criterion, test_loss_list, test_accuracy_list, misclassified_imgs, epoch==EPOCHS-1)
+      test_loss_list, test_accuracy_list, misclassified_imgs = test(model, device, test_loader, criterion, classes, test_loss_list, test_accuracy_list, misclassified_imgs, epoch==EPOCHS-1)
 
   name = 'Resnet18'
   history[name] = {}

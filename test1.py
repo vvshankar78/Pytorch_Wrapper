@@ -1,7 +1,7 @@
 import torch
 
 
-def test(model, device, test_loader, criterion, classes, test_losses, test_accs, misclassified_imgs, is_last_epoch):
+def test(model, device, test_loader, criterion, test_losses, test_accs, misclassified_imgs, is_last_epoch):
     model.eval()
     test_loss = 0
     correct = 0
@@ -29,7 +29,7 @@ def test(model, device, test_loader, criterion, classes, test_losses, test_accs,
     test_accs.append(test_acc)
 #    if test_acc > 85.0:
 #        classwise_acc(model, device, test_loader, classes)
-    print('Test set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)\n'.format(
+    print('Test set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)'.format(
         test_loss, correct, len(test_loader.dataset), test_acc))
     return test_losses, test_accs, misclassified_imgs
 
