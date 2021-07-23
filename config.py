@@ -14,8 +14,8 @@ class ModelConfig(object):
 		self.l2_decay = 5e-3
 		self.lr = 0.001
 		self.momentum = 0.9
-		self.epochs = 15
-		self.peak = 5
+		self.epochs = 50
+		self.peak = 10
 		self.dataset = 'Imagenet' #'Cifar10'
 		self.train_data_path = "/tiny-imagenet-200/train"
 		self.val_data_path = "/tiny-imagenet-200/val"
