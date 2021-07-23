@@ -27,8 +27,8 @@ def test(model, device, test_loader, criterion, classes, test_losses, test_accs,
     test_losses.append(test_loss)
     test_acc = 100. * correct / len(test_loader.dataset)
     test_accs.append(test_acc)
-    if test_acc > 85.0:
-        classwise_acc(model, device, test_loader, classes)
+#    if test_acc > 85.0:
+#        classwise_acc(model, device, test_loader, classes)
     print('Test set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)\n'.format(
         test_loss, correct, len(test_loader.dataset), test_acc))
     return test_losses, test_accs, misclassified_imgs
